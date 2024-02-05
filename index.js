@@ -1,3 +1,4 @@
+import { add, cat, cp, mv, rm, rn } from './modules/fileOperation.js';
 import { setHomeDir } from './modules/homeDir.js';
 import { up, ls, cd } from './modules/navigation.js';
 
@@ -30,15 +31,43 @@ const app = () => {
       case '.exit':
         process.exit(0);
         break;
+
       case 'up':
         currentDir = up(currentDir);
         break;
+
       case 'ls':
         await ls(currentDir);
         break;
+
       case 'cd':
         currentDir = (await cd(currentDir, commandArg)) ?? currentDir;
         break;
+
+      case 'cat':
+        await cat(currentDir, commandArg);
+        break;
+
+      case 'add':
+        await add(currentDir, commandArg);
+        break;
+
+      case 'rn':
+        await rn(currentDir, commandArg);
+        break;
+
+      case 'cp':
+        await cp(currentDir, commandArg);
+        break;
+
+      case 'mv':
+        await mv(currentDir, commandArg);
+        break;
+
+      case 'rm':
+        await rm(currentDir, commandArg);
+        break;
+				
       default:
         console.log(`\x1b[33m${command}\x1b[37m - unknown command`);
     }

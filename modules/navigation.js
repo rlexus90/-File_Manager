@@ -27,7 +27,7 @@ export const cd = async (str, arr) => {
 class Info {
   constructor(str) {
     const itemInfo = path.parse(str);
-    this.name = itemInfo.name;
+    this.name = str;
     this.type = itemInfo.ext ? 'file' : 'dir';
   }
 }
