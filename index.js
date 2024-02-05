@@ -1,7 +1,6 @@
-import { setHomeDir, setRoot } from './modules/homeDir.js';
-import path from 'path';
+import { setHomeDir } from './modules/homeDir.js';
+import { up, ls, cd } from './modules/navigation.js';
 
-const root = setRoot();
 let currentDir = setHomeDir();
 
 const userArg = process.argv[2];
@@ -21,16 +20,30 @@ const app = () => {
   console.log(`Welcome to the File Manager, ${user}!`);
   showCurrentDir();
 
-  process.stdin.on('data', (data) => {
-    const command = data.toString().trim();
+  process.stdin.on('data', async (data) => {
+    const dataString = data.toString().trim();
+    const command = dataString.split(' ')[0];
+    const commandArg =
+      dataString.split(' ').length > 1 ? dataString.split(' ').slice(1) : [];
 
     switch (command) {
       case '.exit':
         process.exit(0);
+        break;
+      case 'up':
+        currentDir = up(currentDir);
+        break;
+      case 'ls':
+        await ls(currentDir);
+        break;
+      case 'cd':
+        currentDir = (await cd(currentDir, commandArg)) ?? currentDir;
+        break;
       default:
         console.log(`\x1b[33m${command}\x1b[37m - unknown command`);
-        showCurrentDir();
     }
+
+    showCurrentDir();
   });
 };
 
