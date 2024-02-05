@@ -1,5 +1,6 @@
 import { add, cat, cp, mv, rm, rn } from './modules/fileOperation.js';
 import { calculateHash } from './modules/hash.js';
+import { help } from './modules/help.js';
 import { setHomeDir } from './modules/homeDir.js';
 import { up, ls, cd } from './modules/navigation.js';
 import { osCommand } from './modules/os.js';
@@ -22,6 +23,7 @@ const showCurrentDir = () =>
 
 const app = () => {
   console.log(`Welcome to the File Manager, ${user}!`);
+	console.log('Type \x1b[33mhelp\x1b[37m if you need help')
   showCurrentDir();
 
   process.stdin.on('data', async (data) => {
@@ -85,6 +87,10 @@ const app = () => {
 
       case 'decompress':
         await decompress(currentDir, commandArg);
+        break;
+
+				case 'help':
+      help();
         break;
 
       default:
