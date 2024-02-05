@@ -1,4 +1,5 @@
 import { add, cat, cp, mv, rm, rn } from './modules/fileOperation.js';
+import { calculateHash } from './modules/hash.js';
 import { setHomeDir } from './modules/homeDir.js';
 import { up, ls, cd } from './modules/navigation.js';
 import { osCommand } from './modules/os.js';
@@ -73,10 +74,16 @@ const app = () => {
         await osCommand(commandArg);
         break;
 
+				case 'hash':
+        await calculateHash(currentDir, commandArg);
+        break;
+
+
       default:
         console.log(`\x1b[33m${command}\x1b[37m - unknown command`);
     }
 
+		
     showCurrentDir();
   });
 };

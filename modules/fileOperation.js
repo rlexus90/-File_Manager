@@ -1,8 +1,7 @@
 import path from 'path';
 import fs from 'fs/promises';
 import { createReadStream, createWriteStream } from 'fs';
-import url from 'url';
-import { setRoot } from './homeDir.js';
+
 
 export const cat = async (str, arr) => {
   const file = path.join(str, arr.join(' '));
