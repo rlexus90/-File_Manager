@@ -102,5 +102,4 @@ export const rm = async (str, arr) => {
       console.log(`File ${file} removed`);
     })
     .catch(() => console.log(`File \x1b[33m${file}\x1b[37m not found!`));
-		
 };

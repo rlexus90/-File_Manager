@@ -1,6 +1,7 @@
 import { add, cat, cp, mv, rm, rn } from './modules/fileOperation.js';
 import { setHomeDir } from './modules/homeDir.js';
 import { up, ls, cd } from './modules/navigation.js';
+import { osCommand } from './modules/os.js';
 
 let currentDir = setHomeDir();
 
@@ -67,7 +68,11 @@ const app = () => {
       case 'rm':
         await rm(currentDir, commandArg);
         break;
-				
+
+      case 'os':
+        await osCommand(commandArg);
+        break;
+
       default:
         console.log(`\x1b[33m${command}\x1b[37m - unknown command`);
     }
