@@ -3,6 +3,7 @@ import { calculateHash } from './modules/hash.js';
 import { setHomeDir } from './modules/homeDir.js';
 import { up, ls, cd } from './modules/navigation.js';
 import { osCommand } from './modules/os.js';
+import { compress, decompress } from './modules/zip.js';
 
 let currentDir = setHomeDir();
 
@@ -74,16 +75,22 @@ const app = () => {
         await osCommand(commandArg);
         break;
 
-				case 'hash':
+      case 'hash':
         await calculateHash(currentDir, commandArg);
         break;
 
+      case 'compress':
+        await compress(currentDir, commandArg);
+        break;
+
+      case 'decompress':
+        await decompress(currentDir, commandArg);
+        break;
 
       default:
         console.log(`\x1b[33m${command}\x1b[37m - unknown command`);
     }
 
-		
     showCurrentDir();
   });
 };
